@@ -79,6 +79,21 @@ resource "aws_security_group" "web-sg" {
   }
 }
 
+resource "aws_s3_bucket" "finance" {
+  bucket = "finance-20260729"
+  tags = {
+    Name        = "finance-20260729"
+    Environment = "Dev"
+  }
+}
+
+resource "aws_s3_object" "finance-2026" {
+  source = "/Users/bob/Downloads/finance-20260729.txt"
+  bucket = "finance"
+  key    = "finance-20260729.txt"
+
+  }
+
 output "web-address" {
   value = "${aws_instance.web.public_dns}:8080"
 }
